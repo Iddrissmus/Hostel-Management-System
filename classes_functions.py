@@ -549,17 +549,18 @@ class Guest:
                         print(f"Welcome {guest_name}")
                         return True
         except FileNotFoundError:
-            print("Error: Admins data file not found.")
+            print("Error: Guest's data file not found.")
         except Exception as e:
-            print(f"An error occurred : {e}")
+            print(f"An error occured : {e}")
 
-        print("Username or Password invalid!!")
+        print("Name or ID invalid!!")
         return False
 
     @staticmethod
     def guest_login_by_input():
         return Guest.guest_login()
 
+    
 
 #FILE PATH FOR ROOM DATA CSV FILE
 # ROOM_DATA = "data/Room_Details.csv"

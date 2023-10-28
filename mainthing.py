@@ -1,4 +1,3 @@
-
 import classes_functions
 is_program_running = True
 admin_menu = False
@@ -141,81 +140,166 @@ while is_program_running:
                         print("\nYou entered an invalid option, please try again.")
                         admin_menu = True
 
+
     elif option == 'g':
-            choice = None
-            if admin1.search_for_guest(guest_name, ID):
+
+        if __name__ == "__main__":
+
+            filename1 = 'data/Guest_data.csv'
+
+            search2 = classes_functions.Admin()
+
+            # choice = None
+
+            guest_verifier = classes_functions.Guest()
+
+            guest_name = input("Enter guest name: ")
+
+            ID = input("Enter guest ID: ")
+
+            print()
+
+            if guest_verifier.guest_login(guest_name, ID):
+
                 print()
+
                 while guest_menu:
+
                     print("\nPlease enter an option")
+
                     print("----------------------------------")
+
                     print("1. Search for available rooms")
+
                     print("2. Check for personal details")
+
                     print("3. Leave room")
+
                     print("4. Back to Main Menu\n")
-                    print("5. Exit\n")
-                    name, f_name, l_name, ID = "", "", "", ""
+
+                    print("e. Exit\n")
+
                     login_success = False
+
                     choice = input("> ")
 
                     if choice == '1':
+
                         print("These are the rooms available:")
+
                         print("---------------------------------------")
+
                         admin1.search_available_rooms()
+
                         choice = input("\nPerform another action?(y/n [Back to main menu])\n > >")
+
                         if choice == 'n':
-                            is_program_running = True
+
+                            guest_menu = False
+
                         elif choice == 'y':
+
                             guest_menu = True
+
+                        else:
+
+                            print("Invalid option, try again")
+
+
 
                     elif choice == '2':
+
                         guest_name = input("Enter your full name: ")
+
                         ID = input("Enter your ID: ")
-                        login_success = guest1.guest_login(guest_name,ID)
+
+                        login_success = guest1.guest_login(guest_name, ID)
+
                         if login_success:
+
                             admin1.search_for_guest(guest_name, ID)
+
                             choice = input("\nPerform another action?(y/n [Back to main menu])\n > >")
+
                             if choice == 'n':
-                                is_program_running = True
+
+                                guest_menu = False
+
                             elif choice == 'y':
+
                                 guest_menu = True
+
                         else:
+
                             guest_menu = True
+
 
                     elif choice == '3':
+
                         f_name = input("Enter your first name: ")
+
                         l_name = input("Enter your last name: ")
+
                         name = l_name + " " + f_name
+
                         ID = input("Enter your ID: ")
+
                         login_success = guest1.guest_login(name, ID)
+
                         if login_success:
+
                             admin1.remove_guest(name, ID)
+
                             choice = input("\nPerform another action?(y/n [Back to main menu])\n > >")
+
                             if choice == 'n':
+
                                 is_program_running = True
+
                             elif choice == 'y':
+
                                 guest_menu = True
+
                         else:
+
                             guest_menu = True
 
-                    elif choice == '4':
-                        is_program_running = True
 
-                    elif choice == '5':
+                    elif choice == '4':
+
                         guest_menu = False
 
-                    elif choice == 'y':
-                        guest_menu = True
-
-                    elif choice == 'n':
                         is_program_running = True
 
+
+                    elif choice == 'e':
+
+                        guest_menu = False
+
+                        is_program_running = False
+
+
+                    # elif choice == 'y':
+
+                    #     guest_menu = True
+
+                    # elif choice == 'n':
+
+                    #     is_program_running = True
+
                     else:
+
                         print("\nYou entered an invalid option, please try again.\n")
+
                         guest_menu = True
+
     elif option == 'e':
+
         is_program_running = False
 
 classes_functions.outro()
 
-# if __name__ == '__main__':
-#     print('PyCharm')
+    # if __name__ == '__main__':
+
+    #     print('PyCharm')
+

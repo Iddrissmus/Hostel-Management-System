@@ -69,7 +69,9 @@
 #
 
 
-admin_verifier = classes_functions.Admin()
+if __name__ == "__main__":
+            filename = 'data/Admin_data.csv'
+            admin_verifier = classes_functions.Admin()
             search1 = classes_functions.Admin()
             admin_name = input("Enter admin name: ")
             password = input("Enter admin password: ")
@@ -90,3 +92,17 @@ admin_verifier = classes_functions.Admin()
                     print("9. Remove Guest")
                     print("b. Back to main menu")
                     print("e. Exit")
+
+                    choice = input("> ")
+
+                    if choice == '1':
+                        classes_functions.loading_bar_animation()
+                        admin1.show_all_rooms()
+                        choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
+                        if choice == 'n':
+                            admin_menu = False
+                        elif choice == 'y':
+                            admin_menu = True
+                        else:
+                            #correct infinite loop
+                            print("Invalid Option, try again")
