@@ -162,6 +162,7 @@ while is_program_running:
             choice = input("> ")
 
             if choice == '1':
+                classes_functions.loading_bar_animation()
 
                 print("These are the rooms available:")
 
