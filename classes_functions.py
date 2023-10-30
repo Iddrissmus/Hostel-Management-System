@@ -1,3 +1,4 @@
+#modules imported
 import sys
 import os
 import time
@@ -5,9 +6,9 @@ from datetime import datetime
 import csv
 
 #ASCII codes for letters used in program
-A = 97
-G = 103
-ESC = 27
+# A = 97
+# G = 103
+# ESC = 27
 
 
 #displays at start of program
@@ -25,12 +26,12 @@ def intro():
                                     |     |    |     | |               |      |    |      |             | |             |
                                     |_____|    |_____| |_______________|      |____|      |_____________| |_____________|
     ''')
-# Call the function to see the output
+#function call to see the output
 # intro()
 
 
 def outro():
-    print(r'''
+    print('''
                                      ______________  _____      _____   _______________     _____
                                     |              | \    \    /    /  |               |   |     |
                                     |     ____     |  \    \  /    /   |     __________|   |     |
@@ -44,26 +45,26 @@ def outro():
                                     |______________|      |____|       |_______________|   |_____|
     ''')
 
-# Call the function to see the output
+#function call to see the output
 #outro()
 
-def split(text, delimiter):
-    # List to store the individual data
-    tokens = []
-    token = ''
-    i = 0
-    while i < len(text):
-        if text[i] == delimiter:
-            # Add the token to the tokens list when a delimiter is found
-            tokens.append(token)
-            token = ''  # Reset the token to an empty string
-        else:
-            token += text[i]  # If no delimiter is found, add character to the token
-        i += 1
-    # When we reach the end of a row, add the last value to the list
-    if token:
-        tokens.append(token)
-    return tokens
+# def split(text, delimiter):
+#     # List to store the individual data
+#     tokens = []
+#     token = ''
+#     i = 0
+#     while i < len(text):
+#         if text[i] == delimiter:
+#             # Add the token to the tokens list when a delimiter is found
+#             tokens.append(token)
+#             token = ''  # Reset the token to an empty string
+#         else:
+#             token += text[i]  # If no delimiter is found, add character to the token
+#         i += 1
+#     # When we reach the end of a row, add the last value to the list
+#     if token:
+#         tokens.append(token)
+#     return tokens
 
 # Example usage
 # text = "Hello,World,Python"
@@ -111,7 +112,7 @@ def get_current_date():
 # current_date = get_current_date()
 # print(current_date)  # Output: current date in the format "dd-mm-yyyy"
 
-
+#creates a loading bar animation
 def loading_bar_animation():
     total_progress = 100  # Total progress value (e.g., 100%)
     bar_width = 50  # Width of the loading bar in characters
@@ -153,7 +154,7 @@ class Room:
         self.occupant_count = room_data[3]
         self.status = room_data[4]
 
-
+    #displays a list of all the rooms
     def show_all_rooms(self):
         try:
             with open('data/Room_data.csv', mode='r') as file:
@@ -170,66 +171,68 @@ class Room:
         except Exception as e:
             print(f"An error occurred : {e}")
 
-    def display_room_data(self):
-        border = "+--------------+-----------------------------------+"
-        time.sleep(0.9)
-        print(border)
-        print("| Room Id      | {:<34} |".format(self.id))
-        # Set the console text color based on the room type
-        if self.type == "Single":
-            print(border)
-            print("| Room Type    | {:<34} |".format(self.type))
-        elif self.type == "Double":
-            print(border)
-            print("| Room Type    | {:<34} |".format(self.type))
-        elif self.type == "Triple":
-            print(border)
-            print("| Room Type    | {:<34} |".format(self.type))
-        else:
-            print(border)
-            print("| Room Type    | {:<34} |".format(self.type))
-        print(border)
-        print("| Price        | {:<34} |".format(self.price))
-        print(border)
-        print("| Occupant No. | {:<34} |".format(self.occupant_count))
-        print(border)
-        # Set the console text color based on the status
-        if self.status == "Unavailable":
-            print(border)
-            print("| Status       | {:<34} |".format(self.status))
-        elif self.status == "Available":
-            print(border)
-            print("| Status       | {:<34} |".format(self.status))
-        print(border)
-        print()
-        time.sleep(0.9)
+    # def display_room_data(self):
+    #     border = "+--------------+-----------------------------------+"
+    #     time.sleep(0.9)
+    #     print(border)
+    #     print("| Room Id      | {:<34} |".format(self.id))
+    #     # Set the console text color based on the room type
+    #     if self.type == "Single":
+    #         print(border)
+    #         print("| Room Type    | {:<34} |".format(self.type))
+    #     elif self.type == "Double":
+    #         print(border)
+    #         print("| Room Type    | {:<34} |".format(self.type))
+    #     elif self.type == "Triple":
+    #         print(border)
+    #         print("| Room Type    | {:<34} |".format(self.type))
+    #     else:
+    #         print(border)
+    #         print("| Room Type    | {:<34} |".format(self.type))
+    #     print(border)
+    #     print("| Price        | {:<34} |".format(self.price))
+    #     print(border)
+    #     print("| Occupant No. | {:<34} |".format(self.occupant_count))
+    #     print(border)
+    #     # Set the console text color based on the status
+    #     if self.status == "Unavailable":
+    #         print(border)
+    #         print("| Status       | {:<34} |".format(self.status))
+    #     elif self.status == "Available":
+    #         print(border)
+    #         print("| Status       | {:<34} |".format(self.status))
+    #     print(border)
+    #     print()
+    #     time.sleep(0.9)
 
 
-
+# ADMIN CLASS, constructor to create an admin object that the admin can use, Display Admin data
+#inherits contents from Room class
 class Admin(Room):
     def __init__(self):
         pass
         # self.name = ""
         # self.password = ""
 
-    import csv
-
+    # import csv
+    #a method that authentics an admin to display admin menu
     def admin_login(self, admin_name, password):
         try:
             with open('data/Admin_data.csv', mode='r') as file:
                 reader = csv.reader(file)
                 for row in reader:
-                    if row[0] == admin_name and row[1] == password:
+                    if row[0] == admin_name and row[1] == password: #iterates through file to confirm deatils
                         print(f"Welcome {admin_name}")
                         return True
-        except FileNotFoundError:
+        except FileNotFoundError: #exception handle
             print("Error: Admins data file not found.")
         except Exception as e:
             print(f"An error occured : {e}")
 
         print("Username or Password invalid!!")
         return False
-
+    
+    #a method to search for all rooms and display it
     def search_for_room(self, room_id):
         try:
             with open('data/Room_data.csv', mode='r') as file:
@@ -335,7 +338,8 @@ class Admin(Room):
     #             room.display_room_data()
     #     if not are_rooms_found:
     #         print("\nNo available Rooms. Check again later\n")
-
+    
+    #a method to search for available rooms in csv file
     def search_available_rooms(self):
         try:
             with open('data/Room_data.csv', mode='r') as file:
@@ -352,6 +356,7 @@ class Admin(Room):
         except Exception as e:
             print(f"Error: {e}")
 
+    #a method to add a room into csv file
     def add_room(self):
         room_id = input("Enter Room ID: ")
         room_type = input("Enter Room Type(Single,Double,Triple,Quadruple): ")
@@ -369,31 +374,32 @@ class Admin(Room):
         except Exception as e:
             print(f"An error occurred: {e}")
 
-    def get_room_by_type(self):
-        success = False
-        while not success:
-            print("\nSelect preferred Room Type: \n1 - Single\n2 - Double\n3 - Triple\n4 - Quadruple")
-            choice = int(input("Your Choice: "))
-            room_types = ["Single", "Double", "Triple", "Quadruple"]
-            if 1 <= choice <= 4:
-                room_type = room_types[choice - 1]
-                rows = get_csv_data(ROOM_DATA)
-                are_rooms_found = False
-                print("\nSearching for Available Rooms...")
-                loading_bar_animation()
-                for row in rows:
-                    data = row.split(',')
-                    if data[1] == room_type and data[4] == "Available":
-                        are_rooms_found = True
-                        room = Room(data)
-                        room.display_room_data()
-                if not are_rooms_found:
-                    print("\nNo available rooms of this type. Check again later\n")
-                else:
-                    success = True
-            else:
-                print("\nInvalid Option. Please try again\n")
+    # def get_room_by_type(self):
+    #     success = False
+    #     while not success:
+    #         print("\nSelect preferred Room Type: \n1 - Single\n2 - Double\n3 - Triple\n4 - Quadruple")
+    #         choice = int(input("Your Choice: "))
+    #         room_types = ["Single", "Double", "Triple", "Quadruple"]
+    #         if 1 <= choice <= 4:
+    #             room_type = room_types[choice - 1]
+    #             rows = get_csv_data(ROOM_DATA)
+    #             are_rooms_found = False
+    #             print("\nSearching for Available Rooms...")
+    #             loading_bar_animation()
+    #             for row in rows:
+    #                 data = row.split(',')
+    #                 if data[1] == room_type and data[4] == "Available":
+    #                     are_rooms_found = True
+    #                     room = Room(data)
+    #                     room.display_room_data()
+    #             if not are_rooms_found:
+    #                 print("\nNo available rooms of this type. Check again later\n")
+    #             else:
+    #                 success = True
+    #         else:
+    #             print("\nInvalid Option. Please try again\n")
 
+    #a method to remove a room from csv file
     def remove_room(self, room_id):
         try:
             with open('data/Room_data.csv', 'r') as file:
@@ -414,6 +420,8 @@ class Admin(Room):
         except Exception as e:
             print(f"An error occurred: {e}")
 
+
+    #a method to show all guests and details in csv file
     def show_all_guests(self):
         try:
             with open('data/Guest_data.csv', mode='r') as file:
@@ -430,6 +438,7 @@ class Admin(Room):
         except Exception as e:
             print(f"An error occurred : {e}")
 
+    #a method to search for a particular guest
     def search_for_guest(self, guest_name):
         try:
             with open('data/Guest_data.csv', mode='r') as file:
@@ -449,6 +458,7 @@ class Admin(Room):
         except Exception as e:
             print(f"Error: {e}")
 
+    #a method to add a guest to csv file
     def add_guest(self):
         guest_id = input("Enter Guest ID: ")
         guest_name = input("Enter Guest name: ")
@@ -465,7 +475,8 @@ class Admin(Room):
             print("Error: Guest CSV file not found.")
         except Exception as e:
             print(f"An error occurred: {e}")
-
+    
+    #a method to remove guest from csv file
     def remove_guest(self, guest_name):
         try:
             with open('data/Guest_data.csv', 'r') as file:
@@ -486,10 +497,8 @@ class Admin(Room):
         except Exception as e:
             print(f"An error occurred: {e}")
 
-# Example usage:
-# room_data = ROOM_DATA
-# room = Room(room_data)
-# room.display_room_data()
+
+# GUEST CLASS, constructor to create an guest object that the guest can use
 class Guest:
     def __init__(self, guest_data=None):
         self.id = guest_data[0] if guest_data else ""
@@ -498,19 +507,19 @@ class Guest:
         self.room_id = guest_data[3] if guest_data else ""
         self.arrival_date = guest_data[4] if guest_data else ""
 
-    def get_details(self):
-        time.sleep(0.9)
-        print("+---------------+-----------------------------------+")
-        print("| Guest Id      | {:<34} |".format(self.id))
-        print("+---------------+-----------------------------------+")
-        print("| Guest Name    | {:<34} |".format(self.name))
-        print("+---------------+-----------------------------------+")
-        print("| Contact Info  | {:<34} |".format(self.contact_info))
-        print("+---------------+-----------------------------------+")
-        print("| Room Id       | {:<34} |".format(self.room_id))
-        print("+---------------+-----------------------------------+")
-        print("| Arrival Date  | {:<34} |".format(self.arrival_date))
-        print("+---------------+-----------------------------------+\n")
+    # def get_details(self):
+    #     time.sleep(0.9)
+    #     print("+---------------+-----------------------------------+")
+    #     print("| Guest Id      | {:<34} |".format(self.id))
+    #     print("+---------------+-----------------------------------+")
+    #     print("| Guest Name    | {:<34} |".format(self.name))
+    #     print("+---------------+-----------------------------------+")
+    #     print("| Contact Info  | {:<34} |".format(self.contact_info))
+    #     print("+---------------+-----------------------------------+")
+    #     print("| Room Id       | {:<34} |".format(self.room_id))
+    #     print("+---------------+-----------------------------------+")
+    #     print("| Arrival Date  | {:<34} |".format(self.arrival_date))
+    #     print("+---------------+-----------------------------------+\n")
 
     # @staticmethod
     # def guest_login(name=None, ID=None):
@@ -540,6 +549,7 @@ class Guest:
     #
     #     return login_status
 
+    #a method to authenticate guest into the system
     def guest_login(self, guest_name, ID):
         try:
             with open('data/Guest_data.csv', mode='r') as file:
@@ -556,9 +566,9 @@ class Guest:
         print("Name or ID invalid!!")
         return False
 
-    @staticmethod
-    def guest_login_by_input():
-        return Guest.guest_login()
+    # @staticmethod
+    # def guest_login_by_input():
+    #     return Guest.guest_login()
 
     
 
