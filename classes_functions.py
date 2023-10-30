@@ -373,7 +373,7 @@ class Admin(Room):
         room_type = input("Enter Room Type(Single,Double,Triple,Quadruple): ")
         occupancy = int(input("Enter Occupancy: "))
         price = int(input("Enter Price: "))
-        status = input("Enter Status (Available/Booked): ")
+        status = input("Enter Status: ")
 
         try:
             with open('data/Room_data.csv', 'a', newline='') as file:
@@ -567,7 +567,7 @@ class Guest:
                 reader = csv.reader(file)
                 for row in reader:
                     if row[1] == guest_name and row[0] == ID:
-                        print(f"Welcome {guest_name}")
+                        # print(f"Welcome {guest_name}")
                         return True
         except FileNotFoundError:
             print("Error: Guest's data file not found.")

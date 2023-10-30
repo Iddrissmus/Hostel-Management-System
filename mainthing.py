@@ -29,8 +29,8 @@ while is_program_running:
             admin_verifier = classes_functions.Admin()  #create object variable of Admin class
             search1 = classes_functions.Admin()
             # search1 = classes_functions.Admin()
-            admin_name = input("Enter admin name: ")
-            password = input("Enter admin password: ")
+            admin_name = input("Enter admin name(admin1): ")
+            password = input("Enter admin password(password1): ")
 
             if admin_verifier.admin_login(admin_name, password): #called admin_login function
                 print()
@@ -65,6 +65,7 @@ while is_program_running:
 
                     elif choice == '2':
                         room_id = input("Enter room ID: ")
+                        classes_functions.loading_bar_animation() #called loading_bar_animation function
                         search1.search_for_room(room_id) #called search_for_room function
                         choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
                         if choice == 'n':
@@ -73,6 +74,7 @@ while is_program_running:
                             admin_menu = True
 
                     elif choice == '3':
+                        classes_functions.loading_bar_animation() #called loading_bar_animation function
                         admin1.search_available_rooms() #function call
                         choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
                         if choice == 'n':
@@ -81,6 +83,7 @@ while is_program_running:
                             admin_menu = True
 
                     elif choice == '4':
+                        classes_functions.loading_bar_animation() #called loading_bar_animation function
                         admin1.add_room() #function call
                         choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
                         if choice == 'n':
@@ -98,6 +101,7 @@ while is_program_running:
                             admin_menu = True
 
                     elif choice == '6':
+                        classes_functions.loading_bar_animation() #called loading_bar_animation function
                         admin1.show_all_guests() #function call
                         choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
                         if choice == 'n':
@@ -116,6 +120,7 @@ while is_program_running:
 
                     elif choice == '8':
                         admin1.add_guest()  #function call
+                        classes_functions.loading_bar_animation() #called loading_bar_animation function
                         print()
                         print("Enter Room details")
                         admin1.add_room()  #function call
@@ -127,6 +132,7 @@ while is_program_running:
 
                     elif choice == '9':
                         guest_name = input("Please input guest name: ")
+                        classes_functions.loading_bar_animation() #called loading_bar_animation function
                         admin1.remove_guest(guest_name) #function call
                         choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
                         if choice == 'n':
@@ -183,6 +189,7 @@ while is_program_running:
            
                     if guest_verifier.guest_login(guest_name, ID): #function call
                         guest_menu = True
+                        classes_functions.loading_bar_animation() #called loading_bar_animation function
                         print()
 
                         while guest_menu:
@@ -193,6 +200,7 @@ while is_program_running:
                             login_success = guest_verifier.guest_login(guest_name, ID) #function call
 
                             if login_success:
+                                print(f"Welcome {guest_name}")
                                 admin1.search_for_guest(guest_name) #function call
                                 break
 
@@ -216,6 +224,7 @@ while is_program_running:
                     print()
 
                     if guest_verifier.guest_login(guest_name, ID): #function call
+                        print(f"Welcome {guest_name}")
                         print()
                         while guest_menu:
                             login_success = False
