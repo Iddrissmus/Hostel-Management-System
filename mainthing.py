@@ -216,19 +216,17 @@ while is_program_running:
                             if login_success:
 
                                 admin1.search_for_guest(guest_name)
+                                break
 
-                                choice = input("\nPerform another action?(y/n [Back to main menu])\n > >")
+                choice = input("\nPerform another action?(y/n [Back to main menu])\n > >")
+                if choice == 'n':
+                    guest_menu = False
 
-                                if choice == 'n':
-                                    break
-                                    # guest_menu = False
+                elif choice == 'y':
+                    guest_menu = True
 
-                                elif choice == 'y':
-                                    continue
-                                    # guest_menu = True
-
-                                else:
-                                    print("Invalid option, try again")
+                else:
+                    print("Invalid option, try again")
 
 
                             # else:
@@ -267,18 +265,19 @@ while is_program_running:
                             if login_success:
 
                                 admin1.remove_guest(guest_name)
+                                break
 
-                                choice = input("\nPerform another action?(y/n [Back to main menu])\n > >")
+                choice = input("\nPerform another action?(y/n [Back to main menu])\n > >")
 
-                                if choice == 'n':
-                                    # is_program_running = True
-                                    guest_menu = False
+                if choice == 'n':
+                    # is_program_running = True
+                    guest_menu = False
 
-                                elif choice == 'y':
-                                    guest_menu = True
+                elif choice == 'y':
+                    guest_menu = True
 
-                                else:
-                                    print("Invalid option, try again")
+                else:
+                    print("Invalid option, try again")
 
 
             elif choice == '4':
