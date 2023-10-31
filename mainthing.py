@@ -29,8 +29,8 @@ while is_program_running:
             admin_verifier = classes_functions.Admin()  #create object variable of Admin class
             search1 = classes_functions.Admin()
             # search1 = classes_functions.Admin()
-            admin_name = input("Enter admin name(admin1): ")
-            password = input("Enter admin password(password1): ")
+            admin_name = input("Enter admin name: ")
+            password = input("Enter admin password: ")
 
             if admin_verifier.admin_login(admin_name, password): #called admin_login function
                 print()
@@ -120,10 +120,10 @@ while is_program_running:
 
                     elif choice == '8':
                         admin1.add_guest()  #function call
-                        classes_functions.loading_bar_animation() #called loading_bar_animation function
                         print()
                         print("Enter Room details")
                         admin1.add_room()  #function call
+                        # classes_functions.loading_bar_animation() #called loading_bar_animation function
                         choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
                         if choice == 'n':
                             admin_menu = False

@@ -1,6 +1,5 @@
 #modules imported
 import sys
-import os
 import time
 from datetime import datetime
 import csv
@@ -47,29 +46,6 @@ def outro():
 
     ''')
 
-def get_csv_data(csv_filename):
-    data = []
-    with open(csv_filename, newline='') as csvfile:
-        csvreader = csv.reader(csvfile)
-        for row in csvreader:
-            formatted_row = ' '.join(row)
-            formatted_row = formatted_row.replace('\t', ' ')
-            data.append(formatted_row)  # Join the CSV row into a single string with spaces instead of tabs
-    return data
-
-# def delete_row(row, search_item):
-#     row_copy = row.copy()  # Create a copy of the input list to avoid modifying it while iterating
-#     for item in row_copy:
-#         if search_item in item:
-#             row.remove(item)  # Remove the item from the list if it contains the search item
-
-# def get_current_date():
-#     # Get the current date and time
-#     now = datetime.now()
-#     # Format the current date as a string with the desired format
-#     formatted_date = now.strftime("%d-%m-%Y")
-#     return formatted_date
-
 #creates a loading bar animation
 def loading_bar_animation():
     total_progress = 100  # Total progress value (e.g., 100%)
@@ -88,7 +64,7 @@ def loading_bar_animation():
         sys.stdout.flush()
 
         # Add a small delay to control the speed of the animation
-        time.sleep(0.05)
+        time.sleep(0.04)
 
     print()  # Move to the next line after the loading bar is complete
 
@@ -104,7 +80,7 @@ class Room:
     def __init__(self, room_data):
         self.id = room_data[0]
         self.type = room_data[1]
-        self.price = room_data[2] + " night"
+        self.price = room_data[2]
         self.occupant_count = room_data[3]
         self.status = room_data[4]
 
@@ -113,10 +89,10 @@ class Room:
         try:
             with open('data/Room_data.csv', mode='r') as file:
                 reader = csv.reader(file)
-                header = next(reader)
+                next(reader)
                 print("Room Data:")
-                print("ID\tRoom Type\t\tOccupancy\tPrice  \tAvailability")
-                print("-" * 70)
+                print("ID\tRoom Type\tOccupancy\tPrice  \tAvailability")
+                print("-" * 65)
                 for row in reader:
                     room_id, room_type, price, occupancy, availability = row
                     print(f"{room_id}\t{room_type}\t\t{occupancy}\t\t{price}\t{availability}")
@@ -136,6 +112,7 @@ class Admin(Room):
         try:
             with open('data/Admin_data.csv', mode='r') as file:
                 reader = csv.reader(file)
+                next(reader)
                 for row in reader:
                     if row[0] == admin_name and row[1] == password: #iterates through file to confirm deatils
                         print(f"Welcome {admin_name}")
@@ -153,10 +130,9 @@ class Admin(Room):
         try:
             with open('data/Room_data.csv', mode='r') as file:
                 reader = csv.reader(file)
-                # headers = next(reader) skip header row
+                next(reader) #skip header row
                 for row in reader:
                     if (row[0]) == room_id:
-                        # if row[4] == 'Available':
                         print("Room ID:", row[0])
                         print("Room Type:", row[1])
                         print("Occupancy:", row[2])
@@ -174,14 +150,13 @@ class Admin(Room):
         try:
             with open('data/Room_data.csv', mode='r') as file:
                 reader = csv.reader(file)
-                headers = next(reader) #skip header row
+                next(reader) #skip header row
                 print("\nAvailable Rooms:")
-                print("ID\t\tRoom Type\t\tOccupancy\t\tPrice \tAvailability")
-                print("-" * 70)
+                print("ID\tRoom Type\tOccupancy\tPrice\tAvailability")
+                print("-" * 65)
                 for row in reader:
                     room_id, room_type, price, occupancy,  availability = row
-                    if availability.lower() == 'available':
-                        print(f"{room_id}\t\t{room_type}\t\t{occupancy}\t\t{price}\t{availability}")
+                    print(f"{room_id}\t{room_type}\t\t{occupancy}\t\t{price}\t{availability}")
                 print()  # Add a newline for better formatting
         except FileNotFoundError:
             print("Error: Room CSV file not found.")
@@ -190,8 +165,8 @@ class Admin(Room):
 
     #a method to add a room into csv file
     def add_room(self):
-        room_id = input("Enter Room ID: ")
-        room_type = input("Enter Room Type(Single,Double,Triple,Quadruple): ")
+        room_id = int(input("Enter Room ID: "))
+        room_type = input("Enter Room Type: ")
         occupancy = int(input("Enter Occupancy: "))
         price = int(input("Enter Price: "))
         status = input("Enter Status: ")
@@ -233,13 +208,13 @@ class Admin(Room):
         try:
             with open('data/Guest_data.csv', mode='r') as file:
                 reader = csv.reader(file)
-                header = next(reader)
+                next(reader)
                 print("Guest Data:")
-                print("Guest ID\tGuest Name\tPhone Number\troom_id\tDate Arrived")
-                print("-" * 70)
+                print("ID\tGuest Name\t\tPhone Number\t\tRoom_id\tDate Arrived")
+                print("-" * 80)
                 for row in reader:
                     guest_id, guest_name, phone_no, room_id, date = row
-                    print(f"{guest_id}\t{guest_name}\t\t{phone_no}\t\t{phone_no}\t\t{date}")
+                    print(f"{guest_id}\t{guest_name}\t\t{phone_no}\t\t{room_id}\t{date}")
         except FileNotFoundError:
             print("Error: Room data file not found.")
         except Exception as e:
@@ -250,7 +225,7 @@ class Admin(Room):
         try:
             with open('data/Guest_data.csv', mode='r') as file:
                 reader = csv.reader(file)
-                # headers = next(reader) skip header row
+                next(reader) #skip header row
                 for row in reader:
                     if (row[1]) == guest_name:
                         print("Guest ID: ", row[0])
@@ -269,8 +244,8 @@ class Admin(Room):
     def add_guest(self):
         guest_id = input("Enter Guest ID: ")
         guest_name = input("Enter Guest name: ")
-        phone_no = input("Enter Phone no: ")
-        room_id = input("Enter room ID: ")
+        phone_no = int(input("Enter Phone no: "))
+        room_id = int(input("Enter room ID: "))
         date = input("Enter date in format (DD-MM-YY): ")
 
         try:
@@ -321,7 +296,6 @@ class Guest:
                 reader = csv.reader(file)
                 for row in reader:
                     if row[1] == guest_name and row[0] == ID:
-                        # print(f"Welcome {guest_name}")
                         return True
         except FileNotFoundError:
             print("Error: Guest's data file not found.")
