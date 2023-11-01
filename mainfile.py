@@ -83,7 +83,7 @@ while is_program_running:
                             admin_menu = True
 
                     elif choice == '4':
-                        classes_functions.loading_bar_animation() #called loading_bar_animation function
+                        #classes_functions.loading_bar_animation() #called loading_bar_animation function
                         admin1.add_room() #function call
                         choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
                         if choice == 'n':

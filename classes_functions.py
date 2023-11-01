@@ -64,7 +64,7 @@ def loading_bar_animation():
         sys.stdout.flush()
 
         # Add a small delay to control the speed of the animation
-        time.sleep(0.04)
+        time.sleep(0.01)
 
     print()  # Move to the next line after the loading bar is complete
 
@@ -156,7 +156,8 @@ class Admin(Room):
                 print("-" * 65)
                 for row in reader:
                     room_id, room_type, price, occupancy,  availability = row
-                    print(f"{room_id}\t{room_type}\t\t{occupancy}\t\t{price}\t{availability}")
+                    if availability.lower() == 'available':
+                        print(f"{room_id}\t{room_type}\t\t{occupancy}\t\t{price}\t{availability}")
                 print()  # Add a newline for better formatting
         except FileNotFoundError:
             print("Error: Room CSV file not found.")
@@ -165,11 +166,15 @@ class Admin(Room):
 
     #a method to add a room into csv file
     def add_room(self):
-        room_id = int(input("Enter Room ID: "))
+        room_id = (input("Enter Room ID: "))
         room_type = input("Enter Room Type: ")
         occupancy = int(input("Enter Occupancy: "))
         price = int(input("Enter Price: "))
         status = input("Enter Status: ")
+
+        if self.check_room_id(room_id):
+             print(f"Error: Room ID {room_id} already exists. Please enter a unique Room ID.")
+             return self.add_room()
 
         try:
             with open('data/Room_data.csv', 'a', newline='') as file:
@@ -181,6 +186,21 @@ class Admin(Room):
         except Exception as e:
             print(f"An error occurred: {e}")
 
+    def check_room_id(self, room_id):
+        try:
+            with open('data/Room_data.csv', 'r') as file:
+                    csv_reader = csv.reader(file)
+                    next(csv_reader)
+                    for row in csv_reader:
+                        existing_room_id = (row[0])
+                        if existing_room_id == room_id:
+                            return True
+        except FileNotFoundError:
+            print("Error: Room CSV file not found.")
+        except Exception as e:
+            print(f"An error occurred: {e}")
+        return False
+    
     #a method to remove a room from csv file
     def remove_room(self, room_id):
         try:
@@ -248,6 +268,10 @@ class Admin(Room):
         room_id = int(input("Enter room ID: "))
         date = input("Enter date in format (DD-MM-YY): ")
 
+        if self.check_guest_name(guest_name):
+             print(f"Error: Room ID {guest_name} already exists. Please enter a unique Guest Name.")
+             return self.add_guest()
+
         try:
             with open('data/Guest_data.csv', 'a', newline='') as file:
                 csv_writer = csv.writer(file)
@@ -257,6 +281,21 @@ class Admin(Room):
             print("Error: Guest CSV file not found.")
         except Exception as e:
             print(f"An error occurred: {e}")
+
+    def check_guest_name(self, guest_name):
+        try:
+            with open('data/Guest_data.csv', 'r') as file:
+                    csv_reader = csv.reader(file)
+                    next(csv_reader)
+                    for row in csv_reader:
+                        existing_guest_name = (row[1])
+                        if existing_guest_name == guest_name:
+                            return True
+        except FileNotFoundError:
+            print("Error: Room CSV file not found.")
+        except Exception as e:
+            print(f"An error occurred: {e}")
+        return False
     
     #a method to remove guest from csv file
     def remove_guest(self, guest_name):

@@ -19,7 +19,6 @@ ID,Room Type,Occupancy,Price,Availability
 25,2 in 1,8000,0,Available
 10,1 in 1,10000,1,Unavailable
 13,1 in 1,10000,1,Unavailable
-12,1 in 1,10000,1,Unavailable
 26,1 in 1,10000,0,Available
 28,1 in 1,10000,0,Available
 24,2 in 1,8000,1,Unavailable
@@ -35,3 +34,4 @@ ID,Room Type,Occupancy,Price,Availability
 900,1 in 1,10000,0,Available
 800,3 in 1,7000,2,Available
 43,1 in 1,10000,0,Available
+12,1 in 1,10000,0,Available
