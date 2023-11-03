@@ -8,7 +8,6 @@ import csv
 def intro():
     print('''
 
-
       ___           ___           ___                       ___                   
      /__/\         /  /\         /  /\          ___        /  /\                  
      \  \:\       /  /::\       /  /:/_        /  /\      /  /:/_                 
@@ -20,14 +19,11 @@ def intro():
    \  \:\        \  \:\/:/     \__\/ /:/        \  \:\   \  \:\/:/      \  \::/   
     \  \:\        \  \::/        /__/:/          \__\/    \  \::/        \__\/    
      \__\/         \__\/         \__\/                     \__\/                  
-                                    
-                                                       
+                                                                                       
     ''')
 
 def outro():
-    print('''
-
-                                  
+    print('''                              
                                   
     ,---,.                 ,---,. 
   ,'  .'  \       ,---,  ,'  .' | 
@@ -43,7 +39,6 @@ def outro():
 |   | ,'         \  ' ;|   | ,'   
 `----'            `--` `----'     
                                   
-
     ''')
 
 #creates a loading bar animation
@@ -65,7 +60,7 @@ def loading_bar_animation():
 
         # Add a small delay to control the speed of the animation
         time.sleep(0.01)
-
+        
     print()  # Move to the next line after the loading bar is complete
 
 #FILE PATH FOR ROOM DATA CSV FILE
@@ -90,7 +85,7 @@ class Room:
             with open('data/Room_data.csv', mode='r') as file:
                 reader = csv.reader(file)
                 next(reader)
-                print("Room Data:")
+                print("Room Data: ")
                 print("ID\tRoom Type\tOccupancy\tPrice  \tAvailability")
                 print("-" * 65)
                 for row in reader:
@@ -133,11 +128,11 @@ class Admin(Room):
                 next(reader) #skip header row
                 for row in reader:
                     if (row[0]) == room_id:
-                        print("Room ID:", row[0])
-                        print("Room Type:", row[1])
-                        print("Occupancy:", row[2])
-                        print("Price:", row[3])
-                        print("Availability:", row[4])
+                        print("Room ID: ", row[0])
+                        print("Room Type: ", row[1])
+                        print("Price: ", row[2])
+                        print("Occupancy: ", row[3])
+                        print("Availability: ", row[4])
                         return
                 print("Room not found.")
         except FileNotFoundError:
@@ -151,9 +146,9 @@ class Admin(Room):
             with open('data/Room_data.csv', mode='r') as file:
                 reader = csv.reader(file)
                 next(reader) #skip header row
-                print("\nAvailable Rooms:")
+                print("\nAvailable Rooms: ")
                 print("ID\tRoom Type\tOccupancy\tPrice\tAvailability")
-                print("-" * 65)
+                print("-" * 63)
                 for row in reader:
                     room_id, room_type, price, occupancy,  availability = row
                     if availability.lower() == 'available':
@@ -168,8 +163,8 @@ class Admin(Room):
     def add_room(self):
         room_id = (input("Enter Room ID: "))
         room_type = input("Enter Room Type: ")
-        occupancy = int(input("Enter Occupancy: "))
         price = int(input("Enter Price: "))
+        occupancy = int(input("Enter Occupancy: "))
         status = input("Enter Status: ")
 
         if self.check_room_id(room_id):
@@ -249,10 +244,10 @@ class Admin(Room):
                 for row in reader:
                     if (row[1]) == guest_name:
                         print("Guest ID: ", row[0])
-                        print("Guest name: ", row[1])
-                        print("Phone no: ", row[2])
-                        print("room ID: ", row[3])
-                        print("Date: ", row[4])
+                        print("Guest Name: ", row[1])
+                        print("Phone Number: ", row[2])
+                        print("Room ID: ", row[3])
+                        print("Date Arrived: ", row[4])
                         return
                 print("Guest not found.")
         except FileNotFoundError:
@@ -263,10 +258,10 @@ class Admin(Room):
     #a method to add a guest to csv file
     def add_guest(self):
         guest_id = input("Enter Guest ID: ")
-        guest_name = input("Enter Guest name: ")
-        phone_no = int(input("Enter Phone no: "))
-        room_id = int(input("Enter room ID: "))
-        date = input("Enter date in format (DD-MM-YY): ")
+        guest_name = input("Enter Guest Name: ")
+        phone_no = int(input("Enter Phone Number: "))
+        room_id = int(input("Enter Room ID: "))
+        date = input("Enter Date in format (DD-MM-YY): ")
 
         if self.check_guest_name(guest_name):
              print(f"Error: Room ID {guest_name} already exists. Please enter a unique Guest Name.")

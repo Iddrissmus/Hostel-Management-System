@@ -12,7 +12,7 @@ while is_program_running:
     # Display an introduction
     classes_functions.intro()
     print("\nHOTEL MANAGEMENT APPLICATION")
-    print("---------------------------------")
+    print("-" * 28)
     print("ADMIN LOGIN - Press 'a'")
     print("GUEST LOGIN - Press 'g'")
     print("EXIT PROGRAM - Press 'e'")
@@ -31,9 +31,9 @@ while is_program_running:
             # search1 = classes_functions.Admin()
             admin_name = input("Enter admin name: ")
             password = input("Enter admin password: ")
+            print()
 
             if admin_verifier.admin_login(admin_name, password): #called admin_login function
-                print()
                 while admin_menu:
                     print("\nPlease enter an option")
                     print("---------------------------------")
@@ -49,96 +49,149 @@ while is_program_running:
                     print("b. Back to main menu")
                     print("e. Exit")
 
-                    choice = input("> ")
+                    choice = input("Enter your choice: ")
 
                     if choice == '1':
                         classes_functions.loading_bar_animation() #called loading_bar_animation function
                         admin1.show_all_rooms()  #called show_all_rooms function
-                        choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
-                        if choice == 'n':
-                            admin_menu = False
-                        elif choice == 'y':
-                            admin_menu = True
-                        else:
-                            #correct infinite loop
-                            print("Invalid Option, try again")
+
+                        while True:
+                            choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
+                            if choice == 'n':
+                                admin_menu = False
+                                break
+                            elif choice == 'y':
+                                # admin_menu = True
+                                break
+                            else:
+                                #correct infinite loop
+                                print("Invalid Option, try again")
 
                     elif choice == '2':
                         room_id = input("Enter room ID: ")
                         classes_functions.loading_bar_animation() #called loading_bar_animation function
                         search1.search_for_room(room_id) #called search_for_room function
-                        choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
-                        if choice == 'n':
-                            admin_menu = False
-                        elif choice == 'y':
-                            admin_menu = True
+                        while True:
+                            choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
+                            if choice == 'n':
+                                admin_menu = False
+                                break
+                            elif choice == 'y':
+                                # admin_menu = True
+                                break
+                            else:
+                                #correct infinite loop
+                                print("Invalid Option, try again")
 
                     elif choice == '3':
                         classes_functions.loading_bar_animation() #called loading_bar_animation function
                         admin1.search_available_rooms() #function call
-                        choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
-                        if choice == 'n':
-                            admin_menu = False
-                        elif choice == 'y':
-                            admin_menu = True
+                        while True:
+                            choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
+                            if choice == 'n':
+                                admin_menu = False
+                                break
+                            elif choice == 'y':
+                                # admin_menu = True
+                                break
+                            else:
+                                #correct infinite loop
+                                print("Invalid Option, try again")
 
                     elif choice == '4':
                         #classes_functions.loading_bar_animation() #called loading_bar_animation function
                         admin1.add_room() #function call
-                        choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
-                        if choice == 'n':
-                            admin_menu = False
-                        elif choice == 'y':
-                            admin_menu = True
+                        while True:
+                            choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
+                            if choice == 'n':
+                                admin_menu = False
+                                break
+                            elif choice == 'y':
+                                # admin_menu = True
+                                break
+                            else:
+                                #correct infinite loop
+                                print("Invalid Option, try again")
 
                     elif choice == '5':
                         room_id = input("Enter Room ID to remove: ")
                         admin1.remove_room(room_id) #function call
-                        choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
-                        if choice == 'n':
-                            admin_menu = False
-                        elif choice == 'y':
-                            admin_menu = True
+                        while True:
+                            choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
+                            if choice == 'n':
+                                admin_menu = False
+                                break
+                            elif choice == 'y':
+                                # admin_menu = True
+                                break
+                            else:
+                                #correct infinite loop
+                                print("Invalid Option, try again")
 
                     elif choice == '6':
                         classes_functions.loading_bar_animation() #called loading_bar_animation function
                         admin1.show_all_guests() #function call
-                        choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
-                        if choice == 'n':
-                            admin_menu = False
-                        elif choice == 'y':
-                            admin_menu = True
+                        while True:
+                            choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
+                            if choice == 'n':
+                                admin_menu = False
+                                break
+                            elif choice == 'y':
+                                # admin_menu = True
+                                break
+                            else:
+                                #correct infinite loop
+                                print("Invalid Option, try again")
 
                     elif choice == '7':
                         guest_name = input("Enter guest name: ")
+                        print()
                         admin1.search_for_guest(guest_name)  #function call
-                        choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
-                        if choice == 'n':
-                            admin_menu = False
-                        elif choice == 'y':
-                            admin_menu = True
+                        while True:
+                            choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
+                            if choice == 'n':
+                                admin_menu = False
+                                break
+                            elif choice == 'y':
+                                # admin_menu = True
+                                break
+                            else:
+                                #correct infinite loop
+                                print("Invalid Option, try again")
 
                     elif choice == '8':
                         admin1.add_guest()  #function call
                         print()
-                        print("Enter Room details")
+                        print("Enter Room details: ")
                         admin1.add_room()  #function call
                         # classes_functions.loading_bar_animation() #called loading_bar_animation function
-                        choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
-                        if choice == 'n':
-                            admin_menu = False
-                        elif choice == 'y':
-                            admin_menu = True
+                        while True:
+                            choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
+                            if choice == 'n':
+                                admin_menu = False
+                                break
+                            elif choice == 'y':
+                                # admin_menu = True
+                                break
+                            else:
+                                #correct infinite loop
+                                print("Invalid Option, try again")
 
                     elif choice == '9':
                         guest_name = input("Please input guest name: ")
                         classes_functions.loading_bar_animation() #called loading_bar_animation function
                         admin1.remove_guest(guest_name) #function call
-                        choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
-                        if choice == 'n':
-                            admin_menu = False
-                        elif choice == 'y':
-                            admin_menu = True
+                        while True:
+                            choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
+                            if choice == 'n':
+                                admin_menu = False
+                                break
+                            elif choice == 'y':
+                                # admin_menu = True
+                                break
+                            else:
+                                #correct infinite loop
+                                print("Invalid Option, try again")
 
                     elif choice == 'b':
                         admin_menu = False
@@ -167,16 +220,20 @@ while is_program_running:
 
             if choice == '1':
                 classes_functions.loading_bar_animation() #function call
-                print("These are the rooms available:")
-                print("---------------------------------------")
+                print("These are the rooms available: ")
+                print("-" * 30)
                 admin1.search_available_rooms() #function call
-                choice = input("\nPerform another action?(y/n [Back to main menu])\n > >")
-                if choice == 'n':
-                    guest_menu = False
-                elif choice == 'y':
-                    guest_menu = True
-                else:
-                    print("Invalid option, try again")
+                while True:
+                            choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
+                            if choice == 'n':
+                                admin_menu = False
+                                break
+                            elif choice == 'y':
+                                # admin_menu = True
+                                break
+                            else:
+                                #correct infinite loop
+                                print("Invalid Option, try again")
 
             elif choice == '2':
                 if __name__ == "__main__":
@@ -204,15 +261,17 @@ while is_program_running:
                                 admin1.search_for_guest(guest_name) #function call
                                 break
 
-                choice = input("\nPerform another action?(y/n [Back to main menu])\n > >")
-                if choice == 'n':
-                    guest_menu = False
-
-                elif choice == 'y':
-                    guest_menu = True
-
-                else:
-                    print("Invalid option, try again")
+                while True:
+                            choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
+                            if choice == 'n':
+                                admin_menu = False
+                                break
+                            elif choice == 'y':
+                                # admin_menu = True
+                                break
+                            else:
+                                #correct infinite loop
+                                print("Invalid Option, try again")
 
             elif choice == '3':
                 if __name__ == "__main__":
@@ -237,16 +296,17 @@ while is_program_running:
                                 admin1.remove_guest(guest_name) #function call
                                 break
 
-                choice = input("\nPerform another action?(y/n [Back to main menu])\n > >")
-
-                if choice == 'n':
-                    guest_menu = False
-
-                elif choice == 'y':
-                    guest_menu = True
-
-                else:
-                    print("Invalid option, try again")
+                while True:
+                            choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
+                            if choice == 'n':
+                                admin_menu = False
+                                break
+                            elif choice == 'y':
+                                # admin_menu = True
+                                break
+                            else:
+                                #correct infinite loop
+                                print("Invalid Option, try again")
 
 
             elif choice == '4':

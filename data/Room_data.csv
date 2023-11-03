@@ -1,4 +1,4 @@
-ID,Room Type,Occupancy,Price,Availability
+ID,Room Type,Price,Occupancy,Availability
 01,4 in 1,6000,4,Unavailable
 02,4 in 1,6000,4,Unavailable
 16,4 in 1,6000,0,Available
@@ -35,3 +35,4 @@ ID,Room Type,Occupancy,Price,Availability
 800,3 in 1,7000,2,Available
 43,1 in 1,10000,0,Available
 12,1 in 1,10000,0,Available
+60,2 in 1,8000,1,Available
