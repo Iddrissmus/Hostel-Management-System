@@ -1,9 +1,9 @@
-ID,Room Type,Price,Occupancy,Availability
+ID,Room Type,Occupancy,Price,Availability
 01,4 in 1,6000,4,Unavailable
 02,4 in 1,6000,4,Unavailable
 16,4 in 1,6000,0,Available
 17,4 in 1,6000,0,Available
-18,4 in 1,6000,1,Available
+18,4 in 1,6000,0,Available
 19,4 in 1,6000,0,Available
 03,3 in 1,7000,3,Unavailable
 04,3 in 1,7000,2,Unavailable
@@ -19,6 +19,7 @@ ID,Room Type,Price,Occupancy,Availability
 25,2 in 1,8000,0,Available
 10,1 in 1,10000,1,Unavailable
 13,1 in 1,10000,1,Unavailable
+12,1 in 1,10000,1,Unavailable
 26,1 in 1,10000,0,Available
 28,1 in 1,10000,0,Available
 24,2 in 1,8000,1,Unavailable
@@ -32,9 +33,5 @@ ID,Room Type,Price,Occupancy,Availability
 102,4 in 1,6000,3,Available
 500,1 in 1,10000,0,Available
 900,1 in 1,10000,0,Available
-800,3 in 1,7000,3,Uavailable
-43,1 in 1,10000,0,Available
-12,1 in 1,10000,0,Available
-60,2 in 1,8000,1,Available
-544,1 in 1,10000,0,Available
-2344,2 in 1,8000,1,Available
+800,3 in 1,7000,2,Available
+43,1 in 1,10000,1,Unavailable

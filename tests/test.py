@@ -400,3 +400,142 @@
 #                     print("\nYou entered an invalid option, please try again.\n")
 
 #                     guest_menu = True
+
+# def set_visitorsName():
+#         while True:
+#             name = input("Enter Guest Name: ")
+#             visName = name.title()
+#             if visName.replace(" ","").isalpha():
+#                 __visitorsName = visName
+#                 break
+#             else:
+#                 print("Name should include only letters! ")
+
+
+
+# set_visitorsName()
+
+
+
+
+# import csv
+
+# room_type_max_occupancy = {
+#     '2 in 1': 2,
+#     '3 in 1': 3,
+#     '4 in 1': 4,
+#     '1 in 1': 1
+# }
+
+# def add_guest_to_room(room_id):
+#     # rooms = []
+#     updated = False
+
+#     with open('data/testroom.csv', 'r') as file:
+#         rooms = list(csv.DictReader(file))
+#         for room in rooms:
+#             if room['ID'] == room_id:
+#                 max_occupancy = room_type_max_occupancy.get(room['Room Type'], 0)
+#                 if int(room['Occupancy']) < max_occupancy and room['Availability'] == 'Available':
+#                     room['Occupancy'] = str(int(room['Occupancy']) + 1)  # Increase occupancy
+#                     if int(room['Occupancy']) == max_occupancy:
+#                         room['Availability'] = 'Uavailable'
+#                     # room['Availability'] = 'Unavailable'  # Mark room as unavailable
+#                     updated = True
+#             # rooms.append(room)
+
+#     if updated:
+#         fieldnames = ['ID', 'Room Type', 'Price', 'Occupancy', 'Availability']
+#         with open('data/testroom.csv', 'w', newline='') as file:
+#             writer = csv.DictWriter(file, fieldnames=fieldnames)
+#             writer.writeheader()
+#             writer.writerows(rooms)
+#         print(f"Guest added to Room {room_id}.")
+#     else:
+#         print(f"No available room with ID {room_id} or Room {room_id} is full.")
+
+# Example usage
+# room_id = input("Enter Room ID to add guest: ")
+# add_guest_to_room(room_id)
+
+
+# import csv
+
+# def read_room_data(file_path):
+#     rooms = []
+#     with open(file_path, 'r') as file:
+#         csv_reader = csv.reader(file)
+#         next(csv_reader)  # Skip the header row
+#         for row in csv_reader:
+#             room_id, room_type, price, occupancy, availability = row
+#             rooms.append({
+#                 'id': room_id,
+#                 'type': room_type,
+#                 'price': int(price),
+#                 'occupancy': int(occupancy),
+#                 'availability': availability.strip().lower() == 'available'
+#             })
+#     return rooms
+
+# def update_room_data(file_path, rooms):
+#     with open(file_path, 'w', newline='') as file:
+#         csv_writer = csv.writer(file)
+#         csv_writer.writerow(['ID', 'Room Type', 'Price', 'Occupancy', 'Availability'])
+#         for room in rooms:
+#             csv_writer.writerow([room['id'], room['type'], room['price'], room['occupancy'], 'Available' if room['availability'] else 'Unavailable'])
+
+# def add_guests_to_rooms(rooms):
+#     for room in rooms:
+#         if room['availability'] and room['occupancy'] < room_type_max_occupancy[room['type']]:
+#             room['occupancy'] += 1
+#             print(f"Guest added to Room {room['id']} (Room Type: {room['type']}). Current occupancy: {room['occupancy']}")
+
+# # Define the maximum occupancy for each room type
+# room_type_max_occupancy = {
+#     '2 in 1': 2,
+#     '3 in 1': 3,
+#     '4 in 1': 4,
+#     '1 in 1': 1
+# }
+
+# # Path to the room CSV file
+# room_file_path = 'data/testroom.csv'
+
+# # Read room data from the CSV file
+# rooms = read_room_data(room_file_path)
+
+# # Add guests to rooms until they reach their maximum occupancy
+# add_guests_to_rooms(rooms)
+
+# # Update the room data in the CSV file
+# update_room_data(room_file_path, rooms)
+
+
+import csv
+
+class YourClass:
+    def __init__(self):
+        self.visitorsName = ""
+
+    def set_visitorsName(self):
+        while True:
+            name = input("Name: ")
+            visName = name.title()
+            if visName.replace(" ", "").isalpha():
+                self.visitorsName = visName
+                self.write_to_csv()
+                break
+            else:
+                print("Invalid Name! Please enter a valid name with letters and spaces.")
+
+    def write_to_csv(self):
+        with open('data/testguest.csv', 'a', newline='') as csvfile:
+            fieldnames = ['Name']
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+            writer.writerow({'Name': self.visitorsName})
+            print("Name added to CSV file successfully!")
+
+# Example usage
+your_object = YourClass()
+your_object.set_visitorsName()

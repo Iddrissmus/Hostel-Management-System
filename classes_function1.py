@@ -6,7 +6,7 @@ import csv
 import string
 
 current_date = datetime.now().strftime("%d-%m-%y")
-print(current_date)
+# print(current_date)
 #displays at start of program
 def intro():
     print('''
@@ -238,12 +238,13 @@ class Admin(Room):
             for room in rooms:
                 if room['ID'] == room_id:
                     max_occupancy = self.room_type_max_occupancy.get(room['Room Type'], 0)
-                    if int(room['Occupancy']) < max_occupancy or int(room['Occupancy']) == max_occupancy and room['Availability'] == 'Available':
-                        room['Occupancy'] = str(int(room['Occupancy']) - 1)  # Decrease occupancy
-                        if int(room['Occupancy']) < max_occupancy:
-                            room['Availability'] = 'Available'
-                        # room['Availability'] = 'Unavailable'  # Mark room as unavailable
-                        updated = True
+                    if int(room['Occupancy']) > 0:
+                        if int(room['Occupancy']) < max_occupancy or int(room['Occupancy']) == max_occupancy and room['Availability'] == 'Available':
+                            room['Occupancy'] = str(int(room['Occupancy']) - 1)  # Decrease occupancy
+                            if int(room['Occupancy']) < max_occupancy:
+                                room['Availability'] = 'Available'
+                            # room['Availability'] = 'Unavailable'  # Mark room as unavailable
+                            updated = True
                 # rooms.append(room)
 
         if updated:
@@ -390,10 +391,14 @@ class Admin(Room):
                 csv_writer = csv.writer(file)
                 csv_writer.writerow([guest_id, guest_name, phone_no, room_id, date])
             print(f"{guest_name} added successfully.")
+            print()
+            room_id = input("Enter Room details: ")
+            self.add_guest_to_room(room_id)
         except FileNotFoundError:
             print("Error: Guest CSV file not found.")
         except Exception as e:
             print(f"An error occurred: {e}")
+
 
     def check_guest_id(self, guest_id):
         try:
