@@ -6,7 +6,7 @@ import csv
 import string
 
 current_date = datetime.now().strftime("%d-%m-%y")
-# print(current_date)
+
 #displays at start of program
 def intro():
     print('''
@@ -325,7 +325,7 @@ class Admin(Room):
                         print("Room ID: ", row[3])
                         print("Date Arrived: ", row[4])
                         return
-                print("Guest not found.")
+                print(f"Guest {guest_name} not found.")
         except FileNotFoundError:
             print("Error: Guest CSV file not found.")
         except Exception as e:
@@ -379,7 +379,7 @@ class Admin(Room):
                 date = current_date
                 break
             except ValueError:
-                print("Invalid Option Entered. Try again")
+                print("Invalid Option Entered! Try again")
                 continue
 
         if self.check_guest_id(guest_id):
@@ -392,7 +392,7 @@ class Admin(Room):
                 csv_writer.writerow([guest_id, guest_name, phone_no, room_id, date])
             print(f"{guest_name} added successfully.")
             print()
-            room_id = input("Enter Room details: ")
+            room_id = input("Enter Room ID: ")
             self.add_guest_to_room(room_id)
         except FileNotFoundError:
             print("Error: Guest CSV file not found.")
@@ -439,12 +439,13 @@ class Admin(Room):
 
 # GUEST CLASS, constructor to create an guest object that the guest can use
 class Guest:
-    def __init__(self, guest_data=None):
-        self.id = guest_data[0] if guest_data else ""
-        self.name = guest_data[1] if guest_data else ""
-        self.contact_info = guest_data[2] if guest_data else ""
-        self.room_id = guest_data[3] if guest_data else ""
-        self.arrival_date = guest_data[4] if guest_data else ""
+    def __init__(self):
+        pass
+        # self.id = guest_data[0] if guest_data else ""
+        # self.name = guest_data[1] if guest_data else ""
+        # self.contact_info = guest_data[2] if guest_data else ""
+        # self.room_id = guest_data[3] if guest_data else ""
+        # self.arrival_date = guest_data[4] if guest_data else ""
 
     #a method to authenticate guest into the system
     def guest_login(self, guest_name, ID):
@@ -455,7 +456,7 @@ class Guest:
                     if row[1] == guest_name and row[0] == ID:
                         return True
         except FileNotFoundError:
-            print("Error: Guest's data file not found.")
+            print("Error: Guest data file not found.")
         except Exception as e:
             print(f"An error occured : {e}")
 
