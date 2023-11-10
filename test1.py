@@ -146,9 +146,9 @@ while is_program_running:
                                 print("Invalid Option! Try again")
 
                     elif choice == '7':
-                        guest_name = input("Please input Guest Name: ")
+                        guest_id = input("Please input Guest ID: ")
                         classes_function1.loading_bar_animation() #called loading_bar_animation function
-                        admin1.remove_guest(guest_name) #function call
+                        admin1.remove_guest(guest_id) #function call
                         room_id = input('Enter Room ID to remove Guest from room: ')
                         admin1.remove_guest_from_room(room_id)
                         while True:
@@ -263,7 +263,7 @@ while is_program_running:
                             login_success = guest1.guest_login(guest_name, ID) #function call
 
                             if login_success:
-                                admin1.remove_guest(guest_name) #function call
+                                admin1.remove_guest(ID) #function call
                                 room_id = input('Enter Room ID to exit room: ')
                                 admin1.remove_guest_from_room(room_id)
                                 break

@@ -5,7 +5,7 @@ from datetime import datetime
 import csv
 import string
 
-current_date = datetime.now().strftime("%d-%m-%y")
+current_date = datetime.now().strftime("%d-%m-%Y")
 
 #displays at start of program
 def intro():
@@ -214,7 +214,7 @@ class Admin(Room):
                     if int(room['Occupancy']) < max_occupancy and room['Availability'] == 'Available':
                         room['Occupancy'] = str(int(room['Occupancy']) + 1)  # Increase occupancy
                         if int(room['Occupancy']) == max_occupancy:
-                            room['Availability'] = 'Uavailable'
+                            room['Availability'] = 'Unavailable'
                         # room['Availability'] = 'Unavailable'  # Mark room as unavailable
                         updated = True
                 # rooms.append(room)
@@ -239,7 +239,7 @@ class Admin(Room):
                 if room['ID'] == room_id:
                     max_occupancy = self.room_type_max_occupancy.get(room['Room Type'], 0)
                     if int(room['Occupancy']) > 0:
-                        if int(room['Occupancy']) < max_occupancy or int(room['Occupancy']) == max_occupancy and room['Availability'] == 'Available':
+                        if int(room['Occupancy']) < max_occupancy or int(room['Occupancy']) == max_occupancy and room['Availability'] == 'Available' or room['Availability'] == 'Unavailable':
                             room['Occupancy'] = str(int(room['Occupancy']) - 1)  # Decrease occupancy
                             if int(room['Occupancy']) < max_occupancy:
                                 room['Availability'] = 'Available'
@@ -253,7 +253,7 @@ class Admin(Room):
                 writer = csv.DictWriter(file, fieldnames=fieldnames)
                 writer.writeheader()
                 writer.writerows(rooms)
-            print(f"Guest added to Room {room_id}.")
+            print(f"Guest removed from Room {room_id}.")
         else:
             print(f"No available room with ID {room_id} or Room {room_id} is full.")
 
@@ -371,7 +371,7 @@ class Admin(Room):
                 phone_no = input("Enter Phone Number: ")
 
                 if len(phone_no) == 10 and phone_no.isdigit() and phone_no[0] == '0':
-                    phone_no = int(phone_no)
+                    phone_no = phone_no
                 else:
                     print("Invalid phone number! Please enter a 10-digit number starting with 0.")
                     continue
@@ -416,7 +416,7 @@ class Admin(Room):
         return False
     
     #a method to remove guest from csv file
-    def remove_guest(self, guest_name):
+    def remove_guest(self, guest_id):
         try:
             with open('data/Guest_data.csv', 'r') as file:
                 guests = list(csv.reader(file))
@@ -424,13 +424,13 @@ class Admin(Room):
                 writer = csv.writer(file)
                 guest_found = False
                 for guest in guests:
-                    if guest[1] == guest_name:
+                    if guest[0] == guest_id:
                         guest_found = True
-                        print(f"Guest {guest_name} removed successfully.")
+                        print(f"Guest {guest_id} removed successfully.")
                     else:
                         writer.writerow(guest)
                 if not guest_found:
-                    print(f"Guest, {guest_name} not found.")
+                    print(f"Guest, {guest_id} not found.")
         except FileNotFoundError:
             print("Error: Guest CSV file not found.")
         except Exception as e:

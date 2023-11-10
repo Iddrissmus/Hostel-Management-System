@@ -1,5 +1,5 @@
-import classes_functions #imported classes_function file from directory
-
+#imported classes_function file from directory
+import classes_functions
 #setting boolean variables to be used
 is_program_running = True
 admin_menu = False
@@ -11,13 +11,13 @@ while is_program_running:
     guest_menu = True
     # Display an introduction
     classes_functions.intro()
-    print("\nHOTEL MANAGEMENT APPLICATION")
+    print("\nHOSTEL MANAGEMENT APPLICATION")
     print("-" * 28)
     print("ADMIN LOGIN - Press 'a'")
     print("GUEST LOGIN - Press 'g'")
     print("EXIT PROGRAM - Press 'e'")
     print()
-    option = input("Enter your choice: ")
+    option = input("Enter an option: ")
     guest1 = classes_functions.Guest() #create object variable of Guest class
     admin1 = classes_functions.Admin() #create object variable of Admin class
 
@@ -40,16 +40,14 @@ while is_program_running:
                     print("1. Show all rooms")
                     print("2. Search for a particular room")
                     print("3. Search for available rooms")
-                    print("4. Add room")
-                    print("5. Remove a room")
-                    print("6. Show all guests")
-                    print("7. Search for Guest")
-                    print("8. Add Guest")
-                    print("9. Remove Guest")
+                    print("4. Show all guests")
+                    print("5. Search for Guest")
+                    print("6. Add Guest")
+                    print("7. Remove Guest")
                     print("b. Back to main menu")
                     print("e. Exit")
 
-                    choice = input("Enter your choice: ")
+                    choice = input("Enter an option: ")
 
                     if choice == '1':
                         classes_functions.loading_bar_animation() #called loading_bar_animation function
@@ -65,7 +63,7 @@ while is_program_running:
                                 break
                             else:
                                 #correct infinite loop
-                                print("Invalid Option, try again")
+                                print("Invalid Option! Try again")
 
                     elif choice == '2':
                         room_id = input("Enter room ID: ")
@@ -81,7 +79,7 @@ while is_program_running:
                                 break
                             else:
                                 #correct infinite loop
-                                print("Invalid Option, try again")
+                                print("Invalid Option! Try again")
 
                     elif choice == '3':
                         classes_functions.loading_bar_animation() #called loading_bar_animation function
@@ -96,39 +94,9 @@ while is_program_running:
                                 break
                             else:
                                 #correct infinite loop
-                                print("Invalid Option, try again")
+                                print("Invalid Option! Try again")
 
                     elif choice == '4':
-                        #classes_functions.loading_bar_animation() #called loading_bar_animation function
-                        admin1.add_room() #function call
-                        while True:
-                            choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
-                            if choice == 'n':
-                                admin_menu = False
-                                break
-                            elif choice == 'y':
-                                # admin_menu = True
-                                break
-                            else:
-                                #correct infinite loop
-                                print("Invalid Option, try again")
-
-                    elif choice == '5':
-                        room_id = input("Enter Room ID to remove: ")
-                        admin1.remove_room(room_id) #function call
-                        while True:
-                            choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
-                            if choice == 'n':
-                                admin_menu = False
-                                break
-                            elif choice == 'y':
-                                # admin_menu = True
-                                break
-                            else:
-                                #correct infinite loop
-                                print("Invalid Option, try again")
-
-                    elif choice == '6':
                         classes_functions.loading_bar_animation() #called loading_bar_animation function
                         admin1.show_all_guests() #function call
                         while True:
@@ -141,10 +109,10 @@ while is_program_running:
                                 break
                             else:
                                 #correct infinite loop
-                                print("Invalid Option, try again")
+                                print("Invalid Option! Try again")
 
-                    elif choice == '7':
-                        guest_name = input("Enter guest name: ")
+                    elif choice == '5':
+                        guest_name = input("Enter Guest Name: ")
                         print()
                         admin1.search_for_guest(guest_name)  #function call
                         while True:
@@ -157,13 +125,13 @@ while is_program_running:
                                 break
                             else:
                                 #correct infinite loop
-                                print("Invalid Option, try again")
+                                print("Invalid Option! Try again")
 
-                    elif choice == '8':
+                    elif choice == '6':
                         admin1.add_guest()  #function call
                         print()
-                        room_id = input("Enter Room details: ")
-                        admin1.add_guest_to_room(room_id)
+                        # room_id = input("Enter Room details: ")
+                        # admin1.add_guest_to_room(room_id)
                         # classes_functions.loading_bar_animation() #called loading_bar_animation function
                         while True:
                             choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
@@ -175,12 +143,14 @@ while is_program_running:
                                 break
                             else:
                                 #correct infinite loop
-                                print("Invalid Option, try again")
+                                print("Invalid Option! Try again")
 
-                    elif choice == '9':
-                        guest_name = input("Please input guest name: ")
+                    elif choice == '7':
+                        guest_id = input("Please input Guest ID: ")
                         classes_functions.loading_bar_animation() #called loading_bar_animation function
-                        admin1.remove_guest(guest_name) #function call
+                        admin1.remove_guest(guest_id) #function call
+                        room_id = input('Enter Room ID to remove Guest from room: ')
+                        admin1.remove_guest_from_room(room_id)
                         while True:
                             choice = input("\nPerform another task? (y/n[Back to main menu])\n> ")
                             if choice == 'n':
@@ -191,7 +161,7 @@ while is_program_running:
                                 break
                             else:
                                 #correct infinite loop
-                                print("Invalid Option, try again")
+                                print("Invalid Option! Try again")
 
                     elif choice == 'b':
                         admin_menu = False
@@ -202,7 +172,7 @@ while is_program_running:
                         is_program_running = False
 
                     else:
-                        print("\nYou entered an invalid option, please try again.")
+                        print("\nYou entered an invalid option! Try again.")
                         admin_menu = True
 
 
@@ -213,14 +183,14 @@ while is_program_running:
             print("----------------------------------")
             print("1. Search for available rooms")
             print("2. Check for personal details")
-            print("3. Leave room")
+            print("3. Leave Room")
             print("4. Back to Main Menu\n")
             print("e. Exit\n")
             choice = input("> ")
 
             if choice == '1':
                 classes_functions.loading_bar_animation() #function call
-                print("These are the rooms available: ")
+                print("These are the Rooms available: ")
                 print("-" * 30)
                 admin1.search_available_rooms() #function call
                 while True:
@@ -233,15 +203,15 @@ while is_program_running:
                                 break
                             else:
                                 #correct infinite loop
-                                print("Invalid Option, try again")
+                                print("Invalid Option! Try again")
 
             elif choice == '2':
                 if __name__ == "__main__":
-                    filename1 = 'data/Guest_data.csv'
+                    # filename1 = 'data/Guest_data.csv'
                     search2 = classes_functions.Admin() #setting an object for Admin class
                     guest_verifier = classes_functions.Guest() #setting an object for Guest class
-                    guest_name = input("Enter guest name: ")
-                    ID = input("Enter guest ID: ")
+                    guest_name = input("Enter Guest Name: ")
+                    ID = input("Enter Guest ID: ")
                     print()
            
                     if guest_verifier.guest_login(guest_name, ID): #function call
@@ -271,15 +241,15 @@ while is_program_running:
                                 break
                             else:
                                 #correct infinite loop
-                                print("Invalid Option, try again")
+                                print("Invalid Option! Try again")
 
             elif choice == '3':
                 if __name__ == "__main__":
-                    filename1 = 'data/Guest_data.csv'
+                    # filename1 = 'data/Guest_data.csv'
                     search2 = classes_functions.Admin() #create object variable of Admin class
                     guest_verifier = classes_functions.Guest() #create object variable of Guest class
-                    guest_name = input("Enter guest name: ")
-                    ID = input("Enter guest ID: ")
+                    guest_name = input("Enter Guest Name: ")
+                    ID = input("Enter Guest ID: ")
                     print()
 
                     if guest_verifier.guest_login(guest_name, ID): #function call
@@ -293,7 +263,9 @@ while is_program_running:
                             login_success = guest1.guest_login(guest_name, ID) #function call
 
                             if login_success:
-                                admin1.remove_guest(guest_name) #function call
+                                admin1.remove_guest(ID) #function call
+                                room_id = input('Enter Room ID to exit room: ')
+                                admin1.remove_guest_from_room(room_id)
                                 break
 
                 while True:
@@ -306,7 +278,7 @@ while is_program_running:
                                 break
                             else:
                                 #correct infinite loop
-                                print("Invalid Option, try again")
+                                print("Invalid Option! Try again")
 
 
             elif choice == '4':
@@ -318,7 +290,7 @@ while is_program_running:
                 is_program_running = False
 
             else:
-                print("\nYou entered an invalid option, please try again.\n")
+                print("\nYou entered an invalid option! Try again.\n")
                 guest_menu = True
 
     elif option == 'e':
@@ -326,7 +298,6 @@ while is_program_running:
     
     else:
         print()
-        print("Invalid option")
+        print("Invalid option! Try again")
 
-classes_functions.outro() # function call
-
+classes_functions.outro() # function callns

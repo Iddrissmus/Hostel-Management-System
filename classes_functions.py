@@ -3,10 +3,9 @@ import sys
 import time
 from datetime import datetime
 import csv
-import string
 
-current_date = datetime.now().strftime("%d-%m-%y")
-print(current_date)
+current_date = datetime.now().strftime("%d-%m-%Y")
+
 #displays at start of program
 def intro():
     print('''
@@ -76,11 +75,12 @@ ADMIN_DATA = "data/Admin_data.csv"
 #ROOM CLASS, constructor to create a Room object that the admin can use, Display Room data
 class Room:
     def __init__(self, room_data):
-        self.id = room_data[0]
-        self.type = room_data[1]
-        self.price = room_data[2]
-        self.occupant_count = room_data[3]
-        self.status = room_data[4]
+        pass
+        # self.id = room_data[0]
+        # self.type = room_data[1]
+        # self.price = room_data[2]
+        # self.occupant_count = room_data[3]
+        # self.status = room_data[4]
 
     #displays a list of all the rooms
     def show_all_rooms(self):
@@ -167,43 +167,7 @@ class Admin(Room):
         except Exception as e:
             print(f"Error: {e}")
 
-    #a method to add a room into csv file
-    # def add_room(self):
-    #     while True:
-    #         try:
-    #             room_id = int((input("Enter Room ID: ")))
-    #             room_type = input("Enter Room Type: ")
-    #             price = int(input("Enter Price: "))
-    #             occupancy = int(input("Enter Occupancy: "))
-    #             status = input("Enter Status: ")
-    #             break
-    #         except ValueError:
-    #             print("Invalid Option Entered. Try again")
-    #             continue
-
-    #     if self.check_room_id(room_id):
-    #          print(f"Error: Room ID {room_id} already exists. Please enter a unique Room ID.")
-    #          return self.add_room()
-
-    #     try:
-    #         with open('data/Room_data.csv', 'a', newline='') as file:
-    #             csv_writer = csv.writer(file)
-    #             csv_writer.writerow([room_id, room_type, price, occupancy, status])
-    #         print(f"Room {room_id} added successfully.")
-    #     except FileNotFoundError:
-    #         print("Error: Room CSV file not found.")
-    #     except Exception as e:
-    #         print(f"An error occurred: {e}")
-
-    # room_type_max_occupancy = {
-    # '2 in 1': 2,
-    # '3 in 1': 3,
-    # '4 in 1': 4,
-    # '1 in 1': 1 }
-
-
     def add_guest_to_room(self, room_id):
-        # rooms = []
         updated = False
 
         with open('data/Room_data.csv', 'r') as file:
@@ -214,10 +178,8 @@ class Admin(Room):
                     if int(room['Occupancy']) < max_occupancy and room['Availability'] == 'Available':
                         room['Occupancy'] = str(int(room['Occupancy']) + 1)  # Increase occupancy
                         if int(room['Occupancy']) == max_occupancy:
-                            room['Availability'] = 'Uavailable'
-                        # room['Availability'] = 'Unavailable'  # Mark room as unavailable
+                            room['Availability'] = 'Unavailable'
                         updated = True
-                # rooms.append(room)
 
         if updated:
             fieldnames = ['ID', 'Room Type', 'Price', 'Occupancy', 'Availability']
@@ -230,7 +192,6 @@ class Admin(Room):
             print(f"No available room with ID {room_id} or Room {room_id} is full.")
 
     def remove_guest_from_room(self, room_id):
-        # rooms = []
         updated = False
 
         with open('data/Room_data.csv', 'r') as file:
@@ -238,13 +199,12 @@ class Admin(Room):
             for room in rooms:
                 if room['ID'] == room_id:
                     max_occupancy = self.room_type_max_occupancy.get(room['Room Type'], 0)
-                    if int(room['Occupancy']) < max_occupancy or int(room['Occupancy']) == max_occupancy and room['Availability'] == 'Available':
-                        room['Occupancy'] = str(int(room['Occupancy']) - 1)  # Decrease occupancy
-                        if int(room['Occupancy']) < max_occupancy:
-                            room['Availability'] = 'Available'
-                        # room['Availability'] = 'Unavailable'  # Mark room as unavailable
-                        updated = True
-                # rooms.append(room)
+                    if int(room['Occupancy']) > 0:
+                        if int(room['Occupancy']) < max_occupancy or int(room['Occupancy']) == max_occupancy and room['Availability'] == 'Available' or room['Availability'] == 'Unavailable':
+                            room['Occupancy'] = str(int(room['Occupancy']) - 1)  # Decrease occupancy
+                            if int(room['Occupancy']) < max_occupancy:
+                                room['Availability'] = 'Available'
+                            updated = True
 
         if updated:
             fieldnames = ['ID', 'Room Type', 'Price', 'Occupancy', 'Availability']
@@ -252,7 +212,7 @@ class Admin(Room):
                 writer = csv.DictWriter(file, fieldnames=fieldnames)
                 writer.writeheader()
                 writer.writerows(rooms)
-            print(f"Guest added to Room {room_id}.")
+            print(f"Guest removed from Room {room_id}.")
         else:
             print(f"No available room with ID {room_id} or Room {room_id} is full.")
 
@@ -324,7 +284,7 @@ class Admin(Room):
                         print("Room ID: ", row[3])
                         print("Date Arrived: ", row[4])
                         return
-                print("Guest not found.")
+                print(f"Guest {guest_name} not found.")
         except FileNotFoundError:
             print("Error: Guest CSV file not found.")
         except Exception as e:
@@ -333,28 +293,6 @@ class Admin(Room):
 
     def is_valid_name(self, name):
         return all(char.isalpha() or char.isspace() for char in name)
-
-
-    # def set_userContact(self):
-        while True:
-                contact = input("Phone Number: ")  
-                if contact.isdigit() and len(contact) == 10 and contact[0] == '0':
-                    self.__contact = contact
-                    break
-                else:
-                    print("Invalid contact number format")
-            
-
-    # def set_visitorsName(self):
-        while True:
-            name = input("Enter Guest Name: ")
-            visName = name.capitalize().replace(" ", "  ")
-            if visName.isalpha():
-                self.__visitorsName = visName
-                break
-            else:
-                print("Name should include only letters! ")
-
 
     #a method to add a guest to csv file
     def add_guest(self):
@@ -370,7 +308,7 @@ class Admin(Room):
                 phone_no = input("Enter Phone Number: ")
 
                 if len(phone_no) == 10 and phone_no.isdigit() and phone_no[0] == '0':
-                    phone_no = int(phone_no)
+                    phone_no = phone_no
                 else:
                     print("Invalid phone number! Please enter a 10-digit number starting with 0.")
                     continue
@@ -378,7 +316,7 @@ class Admin(Room):
                 date = current_date
                 break
             except ValueError:
-                print("Invalid Option Entered. Try again")
+                print("Invalid Option Entered! Try again")
                 continue
 
         if self.check_guest_id(guest_id):
@@ -390,10 +328,14 @@ class Admin(Room):
                 csv_writer = csv.writer(file)
                 csv_writer.writerow([guest_id, guest_name, phone_no, room_id, date])
             print(f"{guest_name} added successfully.")
+            print()
+            room_id = input("Enter Room ID: ")
+            self.add_guest_to_room(room_id)
         except FileNotFoundError:
             print("Error: Guest CSV file not found.")
         except Exception as e:
             print(f"An error occurred: {e}")
+
 
     def check_guest_id(self, guest_id):
         try:
@@ -411,7 +353,7 @@ class Admin(Room):
         return False
     
     #a method to remove guest from csv file
-    def remove_guest(self, guest_name):
+    def remove_guest(self, guest_id):
         try:
             with open('data/Guest_data.csv', 'r') as file:
                 guests = list(csv.reader(file))
@@ -419,13 +361,13 @@ class Admin(Room):
                 writer = csv.writer(file)
                 guest_found = False
                 for guest in guests:
-                    if guest[1] == guest_name:
+                    if guest[0] == guest_id:
                         guest_found = True
-                        print(f"Guest {guest_name} removed successfully.")
+                        print(f"Guest {guest_id} removed successfully.")
                     else:
                         writer.writerow(guest)
                 if not guest_found:
-                    print(f"Guest, {guest_name} not found.")
+                    print(f"Guest, {guest_id} not found.")
         except FileNotFoundError:
             print("Error: Guest CSV file not found.")
         except Exception as e:
@@ -434,12 +376,8 @@ class Admin(Room):
 
 # GUEST CLASS, constructor to create an guest object that the guest can use
 class Guest:
-    def __init__(self, guest_data=None):
-        self.id = guest_data[0] if guest_data else ""
-        self.name = guest_data[1] if guest_data else ""
-        self.contact_info = guest_data[2] if guest_data else ""
-        self.room_id = guest_data[3] if guest_data else ""
-        self.arrival_date = guest_data[4] if guest_data else ""
+    def __init__(self):
+        pass
 
     #a method to authenticate guest into the system
     def guest_login(self, guest_name, ID):
@@ -450,10 +388,9 @@ class Guest:
                     if row[1] == guest_name and row[0] == ID:
                         return True
         except FileNotFoundError:
-            print("Error: Guest's data file not found.")
+            print("Error: Guest data file not found.")
         except Exception as e:
             print(f"An error occured : {e}")
 
         print("Name or ID invalid!!")
         return False
-
